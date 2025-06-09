@@ -7,7 +7,8 @@ RUN pip install --no-cache-dir \
     sqlalchemy \
     psycopg2-binary \
     jupyter \
-    fastparquet
+    fastparquet \
+    pyarrow
 
 
 WORKDIR /app
