@@ -1,16 +1,21 @@
-version: '3.8'
-
+version: "3.9"
 services:
-  postgres:
+  pgdatabase:
     image: postgres:13
-    container_name: pg_container
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: ny_taxi
-    ports:
-      - "5432:5432"
     volumes:
       - ./ny_taxi_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
- 
+  jupyter:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8888:8888"
+    depends_on:
+      - pgdatabase
