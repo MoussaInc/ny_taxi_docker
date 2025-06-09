@@ -6,7 +6,9 @@ RUN pip install --no-cache-dir \
     pandas==1.5.3 \
     sqlalchemy \
     psycopg2-binary \
-    jupyter
+    jupyter \
+    fastparquet
+
 
 WORKDIR /app
 
