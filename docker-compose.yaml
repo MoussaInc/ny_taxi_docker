@@ -1,21 +1,27 @@
-version: "3.9"
+version: '3'
 services:
-  pgdatabase:
+  postgres:
     image: postgres:13
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: ny_taxi
-    volumes:
-      - ./ny_taxi_postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
 
   jupyter:
     build: .
-    volumes:
-      - .:/app
     ports:
       - "8888:8888"
+    volumes:
+      - ./notebook:/ny_taxi/work
+      - ./data:/data
     depends_on:
-      - pgdatabase
+      - postgres
+    environment:
+      JUPYTER_TOKEN: "secret"
+
+volumes:
+  pg_data:
